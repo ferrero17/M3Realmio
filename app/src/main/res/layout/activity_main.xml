@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp">
+
+    <EditText
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityEtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:inputType="number"
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityEtID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ID"/>
+
+    <EditText
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityEtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Email"/>
+
+</LinearLayout>
+
+    <Button
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityBtSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+       <Button
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityBtReadAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show All"/>
+
+    <Button
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityBtReadByName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search by Name"/>
+
+        <Button
+            android:layout_margin="8dp"
+            android:id="@+id/mainActivityBtReadById"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search by ID"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_margin="8dp"
+        android:id="@+id/mainActivityUpdateById"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update by ID"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_margin="8dp"
+            android:id="@+id/mainActivityDeleteById"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete by ID"/>
+
+        <Button
+            android:layout_margin="8dp"
+            android:id="@+id/mainActivityDeleteAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete All"/>
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+
+
+</LinearLayout>
+    </ScrollView>
