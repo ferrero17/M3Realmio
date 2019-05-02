@@ -29,7 +29,9 @@ public class AdapterProfesores extends RecyclerView.Adapter<AdapterProfesores.Vi
 
 
         return new ViewHolderProfesores(view);
+
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderProfesores viewHolderProfesores, int i) {
