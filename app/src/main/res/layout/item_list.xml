@@ -9,6 +9,4 @@
         android:text="mensaje"
         android:id="@+id/idDato"/>
 
-
-
 </LinearLayout>

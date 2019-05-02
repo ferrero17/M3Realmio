@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.dani.m3_realmio.AdapterDatos;
+import com.example.dani.m3_realmio.AdapterProfesores;
 import com.example.dani.m3_realmio.R;
 import com.example.dani.m3_realmio.crud.CRUDProfesor;
 import com.example.dani.m3_realmio.model.Profesor;
@@ -27,13 +28,17 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listDatos;
     RecyclerView recycler;
 
+    //RV de Profesores
+    ArrayList<Profesor> profesorsList;
+    RecyclerView recyclerProfesors;
+
+
     private EditText nombreEt, emailEt, idEt;
     private Button saveBt, leerTodoBt, leerbyName, leerById, updateBt, deleteByIdBt, deleteAllBt;
     private Profesor profesor;
     private Realm realm;
 
-    //
-    private TextView rvItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +48,33 @@ public class MainActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
         configView();
 
+        recyclerProfesors = (RecyclerView) findViewById(R.id.recyclerId);
+        recyclerProfesors.setLayoutManager(new LinearLayoutManager(this));
+        profesorsList = new ArrayList<>();
 
-        recycler = (RecyclerView) findViewById(R.id.recyclerId);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
+        for (int i = 0; i < profesorsList.size(); i++) {
 
+            profesorsList.add(profesor);
+
+        }
+
+        AdapterProfesores adapterProfesores = new AdapterProfesores(profesorsList);
+        recyclerProfesors.setAdapter(adapterProfesores);
+
+
+
+       /* recycler = (RecyclerView) findViewById(R.id.recyclerId);
+       recycler.setLayoutManager(new LinearLayoutManager(this));
         listDatos = new ArrayList<>();
 
-        rvItem = findViewById(R.id.idDato);
 
         for (int i = 0; i <50 ; i++) {
            listDatos.add("Dato # "+ i+ " ");
-
-
-
         }
 
         AdapterDatos adapter = new AdapterDatos(listDatos);
         recycler.setAdapter(adapter);
-
+*/
     }
 
     private void configView(){

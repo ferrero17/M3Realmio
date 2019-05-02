@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import com.example.dani.m3_realmio.model.Profesor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
@@ -47,6 +48,7 @@ public class CRUDProfesor {
         RealmResults<Profesor> profesors = realm.where(Profesor.class).findAll();
         for(Profesor profesor: profesors){
             Log.d("TAG", "id: " + profesor.getId() + " Nombre: " + profesor.getName() + " Email: " + profesor.getEmail());
+
         }
 
          return profesors;
