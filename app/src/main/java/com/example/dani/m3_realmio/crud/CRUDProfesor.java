@@ -1,16 +1,21 @@
 package com.example.dani.m3_realmio.crud;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.EditText;
 
 import com.example.dani.m3_realmio.model.Profesor;
+import com.example.dani.m3_realmio.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class CRUDProfesor {
 
@@ -46,6 +51,7 @@ public class CRUDProfesor {
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Profesor> profesors = realm.where(Profesor.class).findAll();
+
         for(Profesor profesor: profesors){
             Log.d("TAG", "id: " + profesor.getId() + " Nombre: " + profesor.getName() + " Email: " + profesor.getEmail());
 

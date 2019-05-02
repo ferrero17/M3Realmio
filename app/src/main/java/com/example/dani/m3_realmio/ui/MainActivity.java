@@ -1,5 +1,7 @@
 package com.example.dani.m3_realmio.ui;
 
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +19,11 @@ import com.example.dani.m3_realmio.crud.CRUDProfesor;
 import com.example.dani.m3_realmio.model.Profesor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,43 +43,17 @@ public class MainActivity extends AppCompatActivity {
     private Profesor profesor;
     private Realm realm;
 
+    private TextView registroTv;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         realm = Realm.getDefaultInstance();
         configView();
 
-        recyclerProfesors = (RecyclerView) findViewById(R.id.recyclerId);
-        recyclerProfesors.setLayoutManager(new LinearLayoutManager(this));
-        profesorsList = new ArrayList<>();
-
-        for (int i = 0; i < profesorsList.size(); i++) {
-
-            profesorsList.add(profesor);
-
-        }
-
-        AdapterProfesores adapterProfesores = new AdapterProfesores(profesorsList);
-        recyclerProfesors.setAdapter(adapterProfesores);
-
-
-
-       /* recycler = (RecyclerView) findViewById(R.id.recyclerId);
-       recycler.setLayoutManager(new LinearLayoutManager(this));
-        listDatos = new ArrayList<>();
-
-
-        for (int i = 0; i <50 ; i++) {
-           listDatos.add("Dato # "+ i+ " ");
-        }
-
-        AdapterDatos adapter = new AdapterDatos(listDatos);
-        recycler.setAdapter(adapter);
-*/
     }
 
     private void configView(){
@@ -98,7 +77,20 @@ public class MainActivity extends AppCompatActivity {
         leerTodoBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String msg ="";
                 CRUDProfesor.getAllProfesor();
+                RealmResults<Profesor> newList = (RealmResults<Profesor>) CRUDProfesor.getAllProfesor();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                for (int i = 0; i < newList.size(); i++) {
+                    msg += (newList.get(i).getId()+" - "+ newList.get(i).getName()+" - "+ newList.get(i).getEmail() + "\n");
+                }
+                dialog.setMessage(msg);
+                dialog.setTitle("RESULTS: ");
+                dialog.create();
+                dialog.show();
+
+
             }
         });
 
@@ -107,7 +99,22 @@ public class MainActivity extends AppCompatActivity {
         leerbyName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String msg ="";
+                Profesor profe = new Profesor();
                 CRUDProfesor.getProfesorByName(nombreEt.getText().toString());
+
+                profe = CRUDProfesor.getProfesorByName(nombreEt.getText().toString());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+                    msg += (profe.getId()+" - "+ profe.getName()+" - "+ profe.getEmail() + "\n");
+
+                dialog.setMessage(msg);
+                dialog.setTitle("RESULTS: ");
+                dialog.create();
+                dialog.show();
+
+
+
             }
         });
 
@@ -115,7 +122,33 @@ public class MainActivity extends AppCompatActivity {
         leerById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CRUDProfesor.getProfesorById(Integer.parseInt(nombreEt.getText().toString()));
+                String msg ="";
+                Profesor profe = new Profesor();
+                CRUDProfesor.getProfesorById(Integer.parseInt(idEt.getText().toString()));
+
+                profe = CRUDProfesor.getProfesorById(Integer.valueOf(idEt.getText().toString()));
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+                if (profe != null){
+
+                    msg += (profe.getId()+" - "+ profe.getName()+" - "+ profe.getEmail() + "\n");
+                    dialog.setMessage(msg);
+                    dialog.setTitle("RESULTS: ");
+                    dialog.create();
+                    dialog.show();
+
+                }else{
+
+                    dialog.setMessage("No hay coincidencias");
+                    dialog.setTitle("RESULTS: ");
+                    dialog.create();
+                    dialog.show();
+
+                }
+
+
+
+
             }
         });
 
@@ -145,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
                 CRUDProfesor.deleteAllProfesor();
             }
         });
-
 
     }
 
