@@ -48,7 +48,7 @@ public class CRUDProfesor {
                 realmProfesor.setCasat(profesor.getCasat());
                 realmProfesor.setSubject(profesor.getSubject());
                 //Afegim el camp a migrar per a la v6
-                realmProfesor.setSubject(profesor.getCognom());
+                realmProfesor.setCognom(profesor.getCognom());
 
             }
         });

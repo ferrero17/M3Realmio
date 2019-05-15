@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 profesor.setCasat(casatEt.getText().toString());
                 profesor.setSubject(materiaET.getText().toString());
                 //seteig de la variable amb el que introdueix el usuari
-                profesor.setSubject(cognomET.getText().toString());
+                profesor.setCognom(cognomET.getText().toString());
                 CRUDProfesor.addProfesor(profesor);
             }
         });
