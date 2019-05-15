@@ -42,6 +42,14 @@ public class CRUDProfesor {
                 Profesor realmProfesor = realm.createObject(Profesor.class, index);
                 realmProfesor.setName(profesor.getName());
                 realmProfesor.setEmail(profesor.getEmail());
+                //migration
+                realmProfesor.setAge(profesor.getAge());
+                realmProfesor.setSexe(profesor.getSexe());
+                realmProfesor.setCasat(profesor.getCasat());
+                realmProfesor.setSubject(profesor.getSubject());
+                //Afegim el camp a migrar per a la v6
+                realmProfesor.setSubject(profesor.getCognom());
+
             }
         });
     }
@@ -53,7 +61,7 @@ public class CRUDProfesor {
         RealmResults<Profesor> profesors = realm.where(Profesor.class).findAll();
 
         for(Profesor profesor: profesors){
-            Log.d("TAG", "id: " + profesor.getId() + " Nombre: " + profesor.getName() + " Email: " + profesor.getEmail());
+            Log.d("TAG", "id: " + profesor.getId() + " Nombre: " + profesor.getName() + " Email: " + profesor.getEmail() + " Age: " + profesor.getAge());
 
         }
 
@@ -94,9 +102,10 @@ public class CRUDProfesor {
         realm.beginTransaction();
         Profesor profesor = realm.where(Profesor.class).equalTo("id", id).findFirst();
 
-        profesor.setName(nom); //Añadir ET para que se modifique desde el
+        profesor.setName(nom);
         realm.insertOrUpdate(profesor);
         realm.commitTransaction();
+
          if (profesor != null){
              Log.d("TAG", "id: " + profesor.getId() + " Nombre: " + profesor.getName() + " Email: " + profesor.getEmail());
          }else {

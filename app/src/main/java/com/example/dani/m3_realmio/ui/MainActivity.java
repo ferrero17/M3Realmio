@@ -38,12 +38,15 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerProfesors;
 
 
-    private EditText nombreEt, emailEt, idEt;
+    private EditText nombreEt, emailEt, idEt,ageEt,sexeEt, casatEt,materiaET;
     private Button saveBt, leerTodoBt, leerbyName, leerById, updateBt, deleteByIdBt, deleteAllBt;
     private Profesor profesor;
     private Realm realm;
 
     private TextView registroTv;
+
+    //Declarem camp nou del ET
+    private EditText cognomET;
 
 
 
@@ -62,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
         nombreEt = findViewById(R.id.mainActivityEtNombre);
         emailEt = findViewById(R.id.mainActivityEtEmail);
         idEt = findViewById(R.id.mainActivityEtID);
+        ageEt = findViewById(R.id.mainActivityEtEdad);
+        sexeEt = findViewById(R.id.mainActivityEtSexe);
+        casatEt = findViewById(R.id.mainActivityEtCasado);
+        materiaET = findViewById(R.id.mainActivityEtMateria);
+
+        //Bindeiem el camp migrat amb el layout
+        cognomET = findViewById(R.id.mainActivityEtApellido);
+
 
         saveBt = findViewById(R.id.mainActivityBtSave);
         saveBt.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 profesor.setName(nombreEt.getText().toString());
                 profesor.setEmail(emailEt.getText().toString());
+                profesor.setAge(Integer.valueOf(ageEt.getText().toString()));
+                profesor.setSexe(Integer.valueOf(sexeEt.getText().toString()));
+                profesor.setCasat(casatEt.getText().toString());
+                profesor.setSubject(materiaET.getText().toString());
+                //seteig de la variable amb el que introdueix el usuari
+                profesor.setSubject(cognomET.getText().toString());
                 CRUDProfesor.addProfesor(profesor);
             }
         });
@@ -83,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 RealmResults<Profesor> newList = (RealmResults<Profesor>) CRUDProfesor.getAllProfesor();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 for (int i = 0; i < newList.size(); i++) {
-                    msg += (newList.get(i).getId()+" - "+ newList.get(i).getName()+" - "+ newList.get(i).getEmail() + "\n");
+                    //Afegim el nou camp cognom que s'ha de mostrar a partir de la nova versió
+                    msg += (newList.get(i).getId()+" - "+ newList.get(i).getName()+ " " +newList.get(i).getCognom()+ " - " + newList.get(i).getEmail() + " - " + newList.get(i).getAge() + " - " + newList.get(i).getSexe() + newList.get(i).getSubject() +"\n");
                 }
                 dialog.setMessage(msg);
                 dialog.setTitle("RESULTS: ");
